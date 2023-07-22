@@ -1,16 +1,31 @@
-const buttons = document.querySelectorAll('.btn');
-const result = document.getElementById('resultat')
+const counterDisplay = document.querySelector('h3');
+let counter = 0;
 
-buttons.forEach((button)=>{
-    button.addEventListener('click',(e)=>{
-        result.textContent += e.target.id;
-    });
-});
+const bubbleMaker = ()=>{
 
-equal.addEventListener('click',()=>{
-    result.textContent = eval(result.textContent);
+const bubble = document.createElement('span');
+bubble.classList.add('bubble');
+document.body.appendChild(bubble);
+    
+const size = Math.random() * 200 + 100 + 'px';
+bubble.style.height = size;
+bubble.style.width = size;
+
+bubble.style.top = Math.random() * 100 + 50 + '%';
+bubble.style.left = Math.random() * 100 + '%';
+
+const PlusMoins = Math.random() > 0.5 ? 1 : -1;
+bubble.style.setProperty('--left', Math.random() * 100 * PlusMoins + '%');
+
+bubble.addEventListener('click',()=>{
+    counter++;
+    counterDisplay.textContent = counter;
+    bubble.remove();
 })
 
-clear.addEventListener('click',()=>{
-    result.textContent = "";
-})
+setTimeout(()=>{
+    bubble.remove();
+},8000);
+};
+
+setInterval(bubbleMaker,300);
